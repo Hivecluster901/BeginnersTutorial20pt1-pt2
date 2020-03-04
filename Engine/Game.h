@@ -27,6 +27,7 @@
 #include "Ball.h"
 #include "RectF.h"
 #include "Sound.h"
+#include "Brick.h"
 
 class Game
 {
@@ -48,7 +49,10 @@ private:
 	/*  User Variables              */
     FrameTimer ft;
     Ball ball;
+    Brick brick;
     RectF walls;
     Sound soundPad;
+    Sound soundBrick;
+    
 	/********************************/
 };
