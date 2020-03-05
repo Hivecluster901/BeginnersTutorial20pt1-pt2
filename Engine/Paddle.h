@@ -17,7 +17,9 @@ public:
 private:
 	Vec2 pos;
 	Color color = Colors::White;
+	Color wingColor = Colors::Red;
 	float halfWidth;
 	float halfHeight;
 	static constexpr float speed = 300.0f;
+	static constexpr float wingWidth = 20.0f;
 };
