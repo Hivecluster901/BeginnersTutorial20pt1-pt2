@@ -23,6 +23,8 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
+#include "RectF.h"
+#include "Ball.h"
 
 class Game
 {
@@ -42,5 +44,6 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+    Ball ball;
 	/********************************/
 };
