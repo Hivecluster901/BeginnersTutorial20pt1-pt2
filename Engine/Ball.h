@@ -14,6 +14,7 @@ public:
 	RectF GetRect() const;
 	void ReboundX();
 	void ReboundY();
+	Vec2 GetVelocity() const;
 private:
 	static constexpr float radius = 7.0f;
 	Vec2 pos;
