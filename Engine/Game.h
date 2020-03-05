@@ -50,6 +50,8 @@ private:
     FrameTimer ft;
     RectF walls;
     Ball ball;
+    Brick brick;
     Sound soundPad;
+    Sound soundBrick;
 	/********************************/
 };
