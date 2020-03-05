@@ -11,6 +11,7 @@ public:
 	void ReboundX();
 	void ReboundY();
 	bool DoWallCollision(const RectF& walls);
+	Vec2 GetVelocity() const;
 private:
 	static constexpr float radius = 7.0f;
 	Vec2 pos;

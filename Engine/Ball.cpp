@@ -62,3 +62,8 @@ bool Ball::DoWallCollision(const RectF& walls)
 	}
 	return false;
 }
+
+Vec2 Ball::GetVelocity() const
+{
+	return vel;
+}
