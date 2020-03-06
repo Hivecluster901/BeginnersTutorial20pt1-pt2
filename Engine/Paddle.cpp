@@ -37,7 +37,7 @@ void Paddle::Update(const Keyboard& kbd, float dt)
 bool Paddle::DoBallCollision(Ball& ball) const
 {
 	const RectF rect = GetRect();
-	if (rect.IsOverlappingWith(ball.GetRect()))
+	if (ball.GetVelocity().y > 0 &&rect.IsOverlappingWith(ball.GetRect()))
 	{
 		ball.ReboundY();
 		return true;
