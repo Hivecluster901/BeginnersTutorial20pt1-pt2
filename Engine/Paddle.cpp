@@ -34,15 +34,20 @@ void Paddle::Update(const Keyboard& kbd, float dt)
 	}
 }
 
-bool Paddle::DoBallCollision(Ball& ball) const
+bool Paddle::DoBallCollision(Ball& ball)
 {
 	const RectF rect = GetRect();
-	if (ball.GetVelocity().y > 0 &&rect.IsOverlappingWith(ball.GetRect()))
+	if (ball.GetVelocity().y > 0 && rect.IsOverlappingWith(ball.GetRect()) && GetRect().left < ball.GetPosition().x && ball.GetPosition().x < GetRect().right)
 	{
 		ball.ReboundY();
 		return true;
 	}
-	return false;
+	else if (ball.GetVelocity().y > 0 && rect.IsOverlappingWith(ball.GetRect()) && GetRect().top < ball.GetPosition().y && ball.GetPosition().y < GetRect().bottom)
+	{
+		ball.ReboundX();
+		return true;
+	}
+		return false;
 }
 
 void Paddle::DoWallCollision(const RectF& walls)

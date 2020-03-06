@@ -11,7 +11,7 @@ public:
 	void Draw(Graphics& gfx) const;
 	RectF GetRect() const;
 	void Update( const Keyboard& kbd, float dt);
-	bool DoBallCollision(Ball& ball) const;
+	bool DoBallCollision(Ball& ball);
 	void DoWallCollision(const RectF& walls);
 private:
 	Vec2 pos;

@@ -53,6 +53,7 @@ private:
     static constexpr int nBricksAcross = 18;
     static constexpr int nBricksDown = 4;
     static constexpr int nBricks = nBricksAcross * nBricksDown;
+    bool PadCollidedWithBall = false;
     FrameTimer ft;
     Brick bricks[nBricks];
     RectF walls;
