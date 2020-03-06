@@ -17,9 +17,17 @@ void Brick::Draw(Graphics& gfx) const
 
 bool Brick::DoBallCollision(Ball& ball)
 {
+	const Vec2 ballPos = ball.GetPosition();
 	if (!isDestroyed && rect.isOverLappingWith(ball.GetRect()))
 	{
-		ball.ReboundY();
+		if (ballPos.x >= rect.left && ballPos.x <= rect.right)
+		{
+			ball.ReboundY();
+		}
+		else
+		{
+			ball.ReboundX();
+		}
 		isDestroyed = true;
 		return true;
 	}
