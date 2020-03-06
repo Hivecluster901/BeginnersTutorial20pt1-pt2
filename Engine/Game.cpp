@@ -28,6 +28,7 @@ Game::Game( MainWindow& wnd )
     brick(RectF(Vec2(450.0f, 500.0f), 100.0f, 25.0f), Colors::Red),
     walls(0.0f, (float)gfx.ScreenWidth, 0.0f, (float)gfx.ScreenHeight),
     ball(Vec2(300.0f, 300.0f), Vec2(300.0f, 300.0f)),
+    pad(Vec2(500.0f,500.0f), 100.0f, 25.0f),
     soundPad(L"Sounds\\arkpad.wav")
 {
 }
@@ -57,5 +58,6 @@ void Game::UpdateModel()
 void Game::ComposeFrame()
 {
     brick.Draw(gfx);
+    pad.Draw(gfx);
     ball.Draw(gfx);
 }
