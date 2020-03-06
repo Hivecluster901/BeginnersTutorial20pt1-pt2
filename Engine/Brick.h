@@ -17,6 +17,6 @@ private:
 	static constexpr float padding = 1.0f;
 	RectF rect;
 	Color c;
-	bool isDestroyed = false;
+	bool isDestroyed = true;
 
 };
