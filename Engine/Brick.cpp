@@ -15,21 +15,21 @@ void Brick::Draw(Graphics& gfx) const
 	}
 }
 
-bool Brick::DoBallCollision(Ball& ball)
+bool Brick::CheckBallCollision(Ball& ball) const
+{
+	return !isDestroyed && rect.isOverLappingWith(ball.GetRect());
+}
+
+void Brick::ExecuteBallCollision(Ball& ball)
 {
 	const Vec2 ballPos = ball.GetPosition();
-	if (!isDestroyed && rect.isOverLappingWith(ball.GetRect()))
+	if (ballPos.x >= rect.left && ballPos.x <= rect.right)
 	{
-		if (ballPos.x >= rect.left && ballPos.x <= rect.right)
-		{
-			ball.ReboundY();
-		}
-		else
-		{
-			ball.ReboundX();
-		}
-		isDestroyed = true;
-		return true;
+		ball.ReboundY();
 	}
-	return false;
+	else
+	{
+		ball.ReboundX();
+	}
+	isDestroyed = true;
 }

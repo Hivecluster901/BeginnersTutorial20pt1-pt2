@@ -62,8 +62,9 @@ void Game::UpdateModel()
     ball.Update(dt);
     for (Brick& b : bricks)
     {
-        if (b.DoBallCollision(ball))
+        if (b.CheckBallCollision(ball))
         {
+            b.ExecuteBallCollision(ball);
             soundBrick.Play();
             break;
         }   
