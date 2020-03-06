@@ -3,7 +3,8 @@
 Brick::Brick(const RectF& in_rect, Color in_c)
 	:
 	rect(in_rect),
-	c(in_c)
+	c(in_c),
+	isDestroyed(false)
 {
 }
 
@@ -23,7 +24,11 @@ bool Brick::CheckBallCollision(Ball& ball) const
 void Brick::ExecuteBallCollision(Ball& ball)
 {
 	const Vec2 ballPos = ball.GetPosition();
-	if (ballPos.x >= rect.left && ballPos.x <= rect.right)
+	if (ball.GetVelocity().x * (ballPos - GetCenter()).x > 0  )
+	{
+		ball.ReboundY();
+	}
+	else if (ballPos.x >= rect.left && ballPos.x <= rect.right)
 	{
 		ball.ReboundY();
 	}
@@ -32,4 +37,9 @@ void Brick::ExecuteBallCollision(Ball& ball)
 		ball.ReboundX();
 	}
 	isDestroyed = true;
+}
+
+Vec2 Brick::GetCenter() const
+{
+	return Vec2((rect.right + rect.left)/2.0f, (rect.bottom + rect.top) / 2.0f);
 }

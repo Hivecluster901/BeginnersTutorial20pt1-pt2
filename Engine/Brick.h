@@ -12,10 +12,11 @@ public:
 	void Draw(Graphics& gfx) const;
 	bool CheckBallCollision(Ball& ball) const;
 	void ExecuteBallCollision(Ball& ball);
+	Vec2 GetCenter() const;
 private:
 	static constexpr float padding = 1.0f;
 	RectF rect;
 	Color c;
-	bool isDestroyed = false;
+	bool isDestroyed = true;
 
 };
