@@ -54,5 +54,6 @@ private:
     Ball ball;
     Paddle pad;
     Sound soundPad;
+    Sound soundBrick;
 	/********************************/
 };
