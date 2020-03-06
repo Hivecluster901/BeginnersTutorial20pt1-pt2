@@ -48,6 +48,10 @@ void Game::UpdateModel()
     {
         soundPad.Play();
     }
+    if (brick.DoBallCollision(ball))
+    {
+        soundPad.Play();
+    }
 }
 
 void Game::ComposeFrame()

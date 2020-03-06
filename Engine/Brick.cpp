@@ -9,5 +9,20 @@ Brick::Brick(const RectF& rect_in, Color color_in)
 
 void Brick::Draw(Graphics& gfx) const
 {
-	gfx.DrawRect(rect, color);
+	if (!isDestroyed)
+	{
+		gfx.DrawRect(rect, color);
+	}
 }
+
+bool Brick::DoBallCollision(Ball& ball)
+{
+	if (!isDestroyed && rect.IsOverlappingWith(ball.GetRect()))
+	{
+		ball.ReboundY();
+		isDestroyed = true;
+		return true;
+	}
+	return false;
+}
+
