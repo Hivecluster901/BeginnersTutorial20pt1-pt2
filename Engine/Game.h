@@ -61,12 +61,16 @@ private:
 	int remainingLives = maxLives;
 	Vec2 screenCenter = Vec2(400.0f, 300.0f);
 	Vec2 paddleStartingPos = Vec2(400.0f, 500.0f);
+	Vec2 ballStartingPos = { 200.0f , 300.0f };
+	Vec2 ballStartingVel = Vec2(300.0f, 300.0f);
 	FrameTimer ft;
 	Ball ball;
+	Ball lives[maxLives];
 	Brick bricks[nBricks];
 	Paddle pad;
 	RectF walls;
 	Sound soundPad;
 	Sound soundBrick;
+	Sound soundReady;
 	/********************************/
 };

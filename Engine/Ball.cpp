@@ -1,6 +1,13 @@
 #include "Ball.h"
 #include "SpriteCodex.h"
 
+Ball::Ball(const Vec2& pos_in, const Vec2& vel_in)
+	:
+	pos(pos_in),
+	vel(vel_in)
+{
+}
+
 void Ball::Draw( Graphics & gfx ) const
 {
 	SpriteCodex::DrawBall( pos,gfx );
@@ -57,11 +64,11 @@ void Ball::ReboundY()
 	vel.y = -vel.y;
 }
 
-void Ball::Reset()
+void Ball::Reset(const Vec2& startingPos, const Vec2& startingVel)
 {
 	isCollidedWithBottom = false;
-	pos = ballStartingPos;
-	vel = ballStartingVel;
+	pos = startingPos;
+	vel = startingVel;
 }
 RectF Ball::GetRect() const
 {

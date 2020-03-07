@@ -26,8 +26,10 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd ),
 	walls( 0.0f,float( gfx.ScreenWidth ),0.0f,float( gfx.ScreenHeight ) ),
+	ball(ballStartingPos, ballStartingVel),
 	soundPad( L"Sounds\\arkpad.wav" ),
 	soundBrick( L"Sounds\\arkbrick.wav" ),
+	soundReady(L"Sounds\\ready.wav"),
 	pad(paddleStartingPos,50.0f,15.0f )
 {
 	const Color colors[4] = { Colors::Red,Colors::Green,Colors::Blue,Colors::Cyan };
@@ -45,6 +47,10 @@ Game::Game( MainWindow& wnd )
 				brickWidth,brickHeight ),c );
 			i++;
 		}
+	}
+	for (int j = 0; j < maxLives - 1; j++)
+	{
+		lives[j] = Ball(Vec2(40.0f + 20.0f * j, 20.0f),Vec2(0.0f, 0.0f));
 	}
 }
 
@@ -134,8 +140,9 @@ void Game::UpdateModel( float dt )
 			{
 				isGameOver = false;
 			}
-			ball.Reset();
-			
+			//soundReady.Play(1.0F, 0.05F);
+			ball.Reset(ballStartingPos, ballStartingVel);
+			pad.Reset(paddleStartingPos);
 		}
 		else
 		{
@@ -163,6 +170,10 @@ void Game::ComposeFrame()
 			b.Draw(gfx);
 		}
 		pad.Draw(gfx);
+		for (int i = 0; i < remainingLives - 1; i++)
+		{
+			lives[i].Draw(gfx);
+		}
 	}
 	else if(isGameCompletelyOver)
 	{ 
