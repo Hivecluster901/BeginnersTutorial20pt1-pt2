@@ -25,16 +25,16 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	walls( 0.0f,float( gfx.ScreenWidth ),0.0f,float( gfx.ScreenHeight ) ),
+	walls( 160.0f,float( gfx.ScreenWidth ) - 160.0f, 25.0f,float( gfx.ScreenHeight) - 10.0f),
 	ball(ballStartingPos, ballStartingVel),
 	soundPad( L"Sounds\\arkpad.wav" ),
 	soundBrick( L"Sounds\\arkbrick.wav" ),
 	soundReady(L"Sounds\\ready.wav"),
-	pad(paddleStartingPos,50.0f,15.0f )
+	pad(paddleStartingPos,50.0f,10.0f )
 {
 	const Color colors[4] = { Colors::Red,Colors::Green,Colors::Blue,Colors::Cyan };
 
-	const Vec2 topLeft( 40.0f,40.0f );
+	const Vec2 topLeft( 161.0f,75.0f );
 
 	int i = 0;
 	for( int y = 0; y < nBricksDown; y++ )
@@ -50,7 +50,7 @@ Game::Game( MainWindow& wnd )
 	}
 	for (int j = 0; j < maxLives - 1; j++)
 	{
-		lives[j] = Ball(Vec2(40.0f + 20.0f * j, 20.0f),Vec2(0.0f, 0.0f));
+		lives[j] = Ball(Vec2(40.0f + 20.0f * j, 60.0f),Vec2(0.0f, 0.0f));
 	}
 }
 
@@ -134,7 +134,7 @@ void Game::UpdateModel( float dt )
 				}
 			}
 		}
-		else if (isGameOver && remainingLives > 0)
+		else if (isGameOver && remainingLives > 0 )
 		{
 			if (wnd.kbd.KeyIsPressed(VK_RETURN))
 			{
@@ -148,7 +148,8 @@ void Game::UpdateModel( float dt )
 		{
 			isGameCompletelyOver = true;
 		}
-	}	
+	}
+	
 }
 
 
@@ -164,6 +165,7 @@ void Game::ComposeFrame()
 		{
 			SpriteCodex::DrawReady(screenCenter, gfx);
 		}
+		gfx.DrawBorder( walls,10.0f,Colors::Blue);
 		ball.Draw(gfx);
 		for (const Brick& b : bricks)
 		{

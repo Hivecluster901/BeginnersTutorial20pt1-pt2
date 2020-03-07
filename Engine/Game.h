@@ -50,17 +50,17 @@ private:
 	/*  User Variables              */
 	static constexpr float brickWidth = 40.0f;
 	static constexpr float brickHeight = 24.0f;
-	static constexpr int nBricksAcross = 18;
+	static constexpr int nBricksAcross = 12;
 	static constexpr int nBricksDown = 4;
 	static constexpr int nBricks = nBricksAcross * nBricksDown;
 	float timeForReady = 5.0f;
 	bool isGameStarted = false;
-	bool isGameOver = false;
+	bool isGameOver = true;
 	bool isGameCompletelyOver = false;
 	static constexpr int maxLives = 5;
 	int remainingLives = maxLives;
 	Vec2 screenCenter = Vec2(400.0f, 300.0f);
-	Vec2 paddleStartingPos = Vec2(400.0f, 500.0f);
+	Vec2 paddleStartingPos = Vec2(400.0f, 525.0f);
 	Vec2 ballStartingPos = { 200.0f , 300.0f };
 	Vec2 ballStartingVel = Vec2(300.0f, 300.0f);
 	FrameTimer ft;
