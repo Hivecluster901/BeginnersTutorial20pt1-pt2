@@ -1,5 +1,6 @@
 #include "Brick.h"
 #include <assert.h>
+#include <cmath>
 
 Brick::Brick( const RectF & rect_in,Color color_in )
 	:

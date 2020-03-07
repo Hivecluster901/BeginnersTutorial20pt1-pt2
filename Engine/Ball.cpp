@@ -1,13 +1,5 @@
 #include "Ball.h"
-
 #include "SpriteCodex.h"
-
-Ball::Ball( const Vec2 & pos_in,const Vec2 & vel_in )
-	:
-	pos( pos_in ),
-	vel( vel_in )
-{
-}
 
 void Ball::Draw( Graphics & gfx ) const
 {
@@ -44,10 +36,15 @@ bool Ball::DoWallCollision( const RectF & walls )
 	else if( rect.bottom > walls.bottom )
 	{
 		pos.y -= rect.bottom - walls.bottom;
-		ReboundY();
+		isCollidedWithBottom = true;
 		collided = true;
 	}
 	return collided;
+}
+
+bool Ball::IsCollidedWithBottom() const
+{
+	return isCollidedWithBottom;
 }
 
 void Ball::ReboundX()
@@ -60,6 +57,12 @@ void Ball::ReboundY()
 	vel.y = -vel.y;
 }
 
+void Ball::Reset()
+{
+	isCollidedWithBottom = false;
+	pos = ballStartingPos;
+	vel = ballStartingVel;
+}
 RectF Ball::GetRect() const
 {
 	return RectF::FromCenter( pos,radius,radius );
