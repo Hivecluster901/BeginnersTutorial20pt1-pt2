@@ -17,11 +17,26 @@ void Paddle::Draw(Graphics& gfx) const
 	gfx.DrawRect(rect, color);
 }
 
-bool Paddle::DoBallCollision(Ball& ball) const
+bool Paddle::DoBallCollision(Ball& ball)
 {
-	if ( ball.GetVelocity().y > 0.0f && GetRect().isOverLappingWith(ball.GetRect()))
+	if (!coolDown && ball.GetVelocity().y > 0.0f && GetRect().isOverLappingWith(ball.GetRect()))
 	{
-		ball.ReboundY();
+		const RectF rect = GetRect();
+		const Vec2 ballPos = ball.GetPosition();
+		if (ball.GetVelocity().x * (ballPos - pos).x > 0)
+		{
+			ball.ReboundY();
+			
+		}
+		else if (ballPos.x >= rect.left && ballPos.x <= rect.right)
+		{
+			ball.ReboundY();
+		}
+		else
+		{
+			ball.ReboundX();
+		}
+		coolDown = true;
 		return true;
 	}
 	return false;
@@ -51,6 +66,11 @@ void Paddle::Update(const Keyboard& kbd, float dt)
 	{
 		pos.x -= speed * dt;
 	}
+}
+
+void Paddle::ResetCoolDown()
+{
+	coolDown = false;
 }
 
 RectF Paddle::GetRect() const

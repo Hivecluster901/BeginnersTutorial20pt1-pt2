@@ -40,10 +40,9 @@ Game::Game(MainWindow& wnd)
         const Color c = colors[y];
         for (int x = 0; x < nBricksAcross; x++)
         {
-            if (x == 3 && y == 3)
-            {
-                bricks[i] = Brick(RectF(topLeft + Vec2(brickWidth * x, brickHeight * y), brickWidth, brickHeight), c);
-            }
+            
+            bricks[i] = Brick(RectF(topLeft + Vec2(brickWidth * x, brickHeight * y), brickWidth, brickHeight), c);
+            
             i++;
         }
     }
@@ -52,14 +51,19 @@ Game::Game(MainWindow& wnd)
 void Game::Go()
 {
 	gfx.BeginFrame();	
-	UpdateModel();
+    float elapsedTime = ft.Mark();
+    while (elapsedTime > 0.0f)
+    {
+        float dt = std::min(0.0025f, elapsedTime);
+        UpdateModel(dt);
+        elapsedTime -= dt;
+    }
 	ComposeFrame();
 	gfx.EndFrame();
 }
 
-void Game::UpdateModel()
+void Game::UpdateModel(float dt)
 {
-    const float dt = ft.Mark();
     paddle.Update(wnd.kbd, dt);
     paddle.DoWallCollision(walls);
     ball.Update(dt);
@@ -80,6 +84,7 @@ void Game::UpdateModel()
     }
     if (collisionIndex != -1)
     {
+        paddle.ResetCoolDown();
         bricks[collisionIndex].ExecuteBallCollision(ball);
         soundBrick.Play();
     }
@@ -91,6 +96,7 @@ void Game::UpdateModel()
 
     if (ball.DoWallCollision(walls))
     {
+        paddle.ResetCoolDown();
         soundPad.Play();
     }
 }
