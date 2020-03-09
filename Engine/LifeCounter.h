@@ -3,14 +3,13 @@
 #include "SpriteCodex.h"
 #include "Vec2.h"
 #include "Ball.h"
-#include "Keyboard.h"
 
 class LifeCounter {
 
 public:
 	bool Dead(const Ball& ball);
 	bool IsGameOver();
-	void ResetRoundOverConditon(const Keyboard& kbd);
+	void ResetRoundOverConditon();
 	void Draw(Graphics& gfx) const;
 private:
 	static constexpr int maxLives = 3;

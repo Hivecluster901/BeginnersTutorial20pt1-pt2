@@ -20,13 +20,10 @@ bool LifeCounter::IsGameOver()
 	return isGameOver;
 }
 
-void LifeCounter::ResetRoundOverConditon(const Keyboard& kbd)
+void LifeCounter::ResetRoundOverConditon()
 {
-	if (kbd.KeyIsPressed(VK_RETURN))
-	{
 		isRoundOver = false;
 		isDeadAlreadyEvaluated = false; 
-	}
 }
 
 void LifeCounter::Draw(Graphics& gfx) const

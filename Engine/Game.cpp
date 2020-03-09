@@ -127,11 +127,14 @@ void Game::UpdateModel( float dt )
 		{
 			if (!soundReadyAlreadyPlayed)
 			{
-				soundReady.Play(1.0f, 1.0f);
+				soundReady.Play();
 				soundReadyAlreadyPlayed = true;
 			}
 			ball.ResetBall(ballStartingPos, ballStartingVel);
-			lifeCounter.ResetRoundOverConditon(wnd.kbd);
+			if (soundReady.)//When soundReady is over.
+			{
+				lifeCounter.ResetRoundOverConditon();
+			}
 		}
 	}
 }
