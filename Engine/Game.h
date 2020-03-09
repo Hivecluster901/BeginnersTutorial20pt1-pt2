@@ -58,11 +58,12 @@ private:
 	static constexpr float borderWidth = 10.0f;
 	static constexpr float padding = 1.0f;
 	bool soundReadyAlreadyPlayed = false;
+	bool isGameStarted = false;
 	FrameTimer ft;
 	LifeCounter lifeCounter;
 	Vec2 ballStartingPos = Vec2(324.0f, 300.0f);
 	Vec2 ballStartingVel = Vec2(-300.0f, -300.0f);
-	Vec2 paddleStartingPos = Vec2(400.0f, 500.0f);
+	Vec2 paddleStartingPos = Vec2(400.0f, 525.0f);
 	Vec2 bricksCenter = Vec2(400.0f, 150.0f);
 	const Vec2 topLeft = bricksCenter - Vec2(nBricksAcross / 2.0f * brickWidth, nBricksDown / 2.0f * brickHeight);
 	Ball ball;

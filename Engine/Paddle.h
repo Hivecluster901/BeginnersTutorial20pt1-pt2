@@ -19,9 +19,9 @@ public:
 	void ResetCooldown();
 	void ResetPaddlePos(const Vec2& paddleStartingPos);
 private:
-	static constexpr float wingWidth = 18.0f;
-	Color wingColor = Colors::Red;
-	Color color = Colors::White;
+	static constexpr float wingWidth = 10.0f;
+	Color wingColor = Colors::LightGray;
+	Color color = Colors::Gray;
 	float speed = 300.0f;
 	float halfWidth;
 	float halfHeight;

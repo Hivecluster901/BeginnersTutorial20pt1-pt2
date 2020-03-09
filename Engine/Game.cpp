@@ -31,7 +31,7 @@ Game::Game( MainWindow& wnd )
 	soundBrick( L"Sounds\\arkbrick.wav" ),
 	soundFart(L"Sounds\\fart.wav"),
 	soundReady(L"Sounds\\ready.wav"),
-	pad(paddleStartingPos,50.0f,15.0f )
+	pad(paddleStartingPos,35.0f,7.0f )
 {
 	const Color colors[4] = { Colors::Red,Colors::Green,Colors::Blue,Colors::Cyan };
 
@@ -65,7 +65,14 @@ void Game::Go()
 
 void Game::UpdateModel( float dt )
 {
-	if (!lifeCounter.IsGameOver())
+	if (!isGameStarted)
+	{
+		if (wnd.kbd.KeyIsPressed(VK_RETURN))
+		{
+			isGameStarted = true;
+		}
+	}
+	else if (!lifeCounter.IsGameOver())
 	{
 		if (!lifeCounter.Dead(ball))
 		{
@@ -131,10 +138,7 @@ void Game::UpdateModel( float dt )
 				soundReadyAlreadyPlayed = true;
 			}
 			ball.ResetBall(ballStartingPos, ballStartingVel);
-			if (soundReady.)//When soundReady is over.
-			{
-				lifeCounter.ResetRoundOverConditon();
-			}
+			lifeCounter.ResetRoundOverConditon(dt);
 		}
 	}
 }
@@ -151,24 +155,30 @@ void Game::DrawBorder(Graphics& gfx) const
 
 void Game::ComposeFrame()
 {
-	for (const Brick& b : bricks)
+	if (!isGameStarted)
 	{
-		b.Draw(gfx);
-	}
-	lifeCounter.Draw(gfx);
-	DrawBorder(gfx);
-	if (lifeCounter.IsGameOver())
-	{
-		SpriteCodex::DrawGameOver(Vec2(400.0f, 300.0f), gfx);
-	}
-	else if (lifeCounter.Dead(ball))
-	{
-		SpriteCodex::DrawReady(Vec2(400.0f, 300.0f), gfx);
+		SpriteCodex::DrawTitle(Vec2(400.0f, 300.0f), gfx);
 	}
 	else
 	{
-		ball.Draw(gfx);
+		for (const Brick& b : bricks)
+		{
+			b.Draw(gfx);
+		}
+		lifeCounter.Draw(gfx);
+		DrawBorder(gfx);
 		pad.Draw(gfx);
+		if (lifeCounter.IsGameOver())
+		{
+			SpriteCodex::DrawGameOver(Vec2(400.0f, 300.0f), gfx);
+		}
+		else if (lifeCounter.Dead(ball))
+		{
+			SpriteCodex::DrawReady(Vec2(400.0f, 300.0f), gfx);
+		}
+		else
+		{
+			ball.Draw(gfx);
+		}
 	}
-	
 }

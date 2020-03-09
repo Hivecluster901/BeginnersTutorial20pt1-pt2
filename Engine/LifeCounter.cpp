@@ -1,5 +1,6 @@
 #include "LifeCounter.h"
 
+
 bool LifeCounter::Dead(const Ball& ball)
 {
 	if (ball.BottomCollision() && !isDeadAlreadyEvaluated)
@@ -20,10 +21,15 @@ bool LifeCounter::IsGameOver()
 	return isGameOver;
 }
 
-void LifeCounter::ResetRoundOverConditon()
+void LifeCounter::ResetRoundOverConditon(float dt)
 {
+	readyTimeCounter -= std::fmin(dt, readyTimeCounter);
+	if (readyTimeCounter == 0.0f)
+	{
 		isRoundOver = false;
-		isDeadAlreadyEvaluated = false; 
+		isDeadAlreadyEvaluated = false;
+		readyTimeCounter = readyTime;
+	}
 }
 
 void LifeCounter::Draw(Graphics& gfx) const
