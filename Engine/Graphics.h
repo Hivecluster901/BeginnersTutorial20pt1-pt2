@@ -62,6 +62,8 @@ public:
 	{
 		DrawRect( int( rect.left ),int( rect.top ),int( rect.right ),int( rect.bottom ),c );
 	}
+	void DrawBorder(const RectF& rect, float padding, float borderWidth, Color c);
+	void DrawShading(const RectF& rect, float borderWidth, Color c, bool mode);
 	void DrawCircle( int x,int y,int radius,Color c );
 	~Graphics();
 private:

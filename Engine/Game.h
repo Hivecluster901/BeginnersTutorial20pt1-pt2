@@ -43,7 +43,6 @@ private:
 	void UpdateModel( float dt );
 	/********************************/
 	/*  User Functions              */
-	void DrawBorder(Graphics& gfx) const;
 	/********************************/
 private:
 	MainWindow& wnd;

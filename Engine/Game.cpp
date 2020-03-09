@@ -143,16 +143,6 @@ void Game::UpdateModel( float dt )
 	}
 }
 
-void Game::DrawBorder(Graphics& gfx) const
-{
-	const RectF border = walls.GetExpanded(padding + borderWidth);
-	const Color c = Colors::Blue;
-	gfx.DrawRect((int)border.left, (int)border.top, (int)border.right, (int)border.top + (int)borderWidth,c);
-	gfx.DrawRect((int)border.left, (int)border.top + (int)borderWidth, (int)border.left + (int)borderWidth, (int)border.bottom, c);
-	gfx.DrawRect((int)border.left + (int)borderWidth, (int)border.bottom - (int)borderWidth, (int)border.right, (int)border.bottom, c);
-	gfx.DrawRect((int)border.right - (int)borderWidth, (int)border.top + (int)borderWidth, (int)border.right, (int)border.bottom - (int)borderWidth, c);
-}
-
 void Game::ComposeFrame()
 {
 	if (!isGameStarted)
@@ -161,12 +151,12 @@ void Game::ComposeFrame()
 	}
 	else
 	{
-		for (const Brick& b : bricks)
+		for (Brick& b : bricks)
 		{
 			b.Draw(gfx);
 		}
 		lifeCounter.Draw(gfx);
-		DrawBorder(gfx);
+		gfx.DrawBorder(walls, padding, borderWidth, Colors::Blue);
 		pad.Draw(gfx);
 		if (lifeCounter.IsGameOver())
 		{

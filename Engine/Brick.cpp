@@ -10,11 +10,13 @@ Brick::Brick( const RectF & rect_in,Color color_in )
 {
 }
 
-void Brick::Draw( Graphics & gfx ) const
+void Brick::Draw( Graphics & gfx ) 
 {
 	if( !destroyed )
 	{
-		gfx.DrawRect( rect.GetExpanded( -padding ),color );
+		
+		gfx.DrawRect( rect.GetExpanded( -padding - threeDEffectLength),color );
+		gfx.DrawShading(rect.GetExpanded(-padding - threeDEffectLength), threeDEffectLength,color, true);
 	}
 }
 

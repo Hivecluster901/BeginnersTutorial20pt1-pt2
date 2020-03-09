@@ -336,6 +336,103 @@ void Graphics::DrawRect( int x0,int y0,int x1,int y1,Color c )
 	}
 }
 
+void Graphics::DrawBorder(const RectF& rect, float padding, float borderWidth, Color c)
+{
+	const RectF innerBorder = rect.GetExpanded(padding);
+	const RectF outerBorder = rect.GetExpanded(padding + borderWidth/2.0f);
+	/*DrawRect((int)border.left, (int)border.top, (int)border.right, (int)border.top + (int)borderWidth, c);
+	DrawRect((int)border.left, (int)border.top + (int)borderWidth, (int)border.left + (int)borderWidth, (int)border.bottom, c);
+	DrawRect((int)border.left + (int)borderWidth, (int)border.bottom - (int)borderWidth, (int)border.right, (int)border.bottom, c);
+	DrawRect((int)border.right - (int)borderWidth, (int)border.top + (int)borderWidth, (int)border.right, (int)border.bottom - (int)borderWidth, c);*/
+	DrawShading(innerBorder, borderWidth / 2.0f, c, false);
+	DrawShading(outerBorder, borderWidth/2.0f, c, true);
+}
+
+void Graphics::DrawShading(const RectF& rect, float borderWidth, Color c , bool mode)
+{
+	const RectF border = rect.GetExpanded(borderWidth);
+	for (int i = 0; i <= (int)borderWidth; i++)
+	{
+		if (mode)
+		{
+			DrawRect((int)border.left + i, (int)border.top + i, (int)border.left + i + 1, (int)border.bottom - i, c);
+		}
+		else
+		{
+			DrawRect((int)border.right - i, (int)border.bottom - i - 1, (int)border.right - i - 1, (int)border.top + i + 1, c);
+		}
+	}
+	if (c.GetR() == 255)
+	{
+		c.SetR(200);
+	}
+	if (c.GetG() == 255)
+	{
+		c.SetG(200);
+	}
+	if (c.GetB() == 255)
+	{
+		c.SetB(200);
+	}
+	for (int i = 0; i < (int)borderWidth; i++)
+	{
+		if (mode)
+		{
+			DrawRect((int)border.left + i, (int)border.top + i, (int)border.right - i, (int)border.top + i + 1, c);
+		}
+		else
+		{
+			DrawRect((int)border.left + i, (int)border.bottom - i, (int)border.right - i, (int)border.bottom - i - 1, c);
+		}
+	}
+	if (c.GetR() == 200)
+	{
+		c.SetR(185);
+	}
+	if (c.GetG() == 200)
+	{
+		c.SetG(185);
+	}
+	if (c.GetB() == 200)
+	{
+		c.SetB(185);
+	}
+	for (int i = 0; i < (int)borderWidth; i++)
+	{
+		if (mode)
+		{
+			DrawRect((int)border.left + i, (int)border.bottom - i, (int)border.right - i, (int)border.bottom - i - 1, c);
+		}
+		else
+		{
+			DrawRect((int)border.left + i, (int)border.top + i, (int)border.right - i, (int)border.top + i + 1, c);
+		}
+	}
+	if (c.GetR() == 185)
+	{
+		c.SetR(165);
+	}
+	if (c.GetG() == 185)
+	{
+		c.SetG(165);
+	}
+	if (c.GetB() == 185)
+	{
+		c.SetB(165);
+	}
+	for (int i = 0; i <= (int)borderWidth; i++)
+	{
+		if (mode)
+		{
+			DrawRect((int)border.right - i, (int)border.bottom - i - 1, (int)border.right - i - 1, (int)border.top + i + 1, c);
+		}
+		else
+		{
+			DrawRect((int)border.left + i, (int)border.top + i, (int)border.left + i + 1, (int)border.bottom - i, c);
+		}
+	}
+}
+
 void Graphics::DrawCircle( int x,int y,int radius,Color c )
 {
 	const int rad_sq = radius * radius;

@@ -10,12 +10,13 @@ class Brick
 public:
 	Brick() = default;
 	Brick( const RectF& rect_in,Color color_in );
-	void Draw( Graphics& gfx ) const;
+	void Draw( Graphics& gfx );
 	bool CheckBallCollision( const Ball& ball ) const;
 	void ExecuteBallCollision( Ball& ball );
 	Vec2 GetCenter() const;
 private:
 	static constexpr float padding = 1.0f;
+	static constexpr float threeDEffectLength = 2.0f;
 	RectF rect;
 	Color color;
 	bool destroyed = true;
