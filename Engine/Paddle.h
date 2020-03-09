@@ -17,6 +17,7 @@ public:
 	void Update( const Keyboard& kbd,float dt );
 	RectF GetRect() const;
 	void ResetCooldown();
+	void ResetPaddlePos(const Vec2& paddleStartingPos);
 private:
 	static constexpr float wingWidth = 18.0f;
 	Color wingColor = Colors::Red;

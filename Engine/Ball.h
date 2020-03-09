@@ -16,6 +16,7 @@ public:
 	RectF GetRect() const;
 	Vec2 GetVelocity() const;
 	Vec2 GetPosition() const;
+	void ResetBall( const Vec2& ballStartingPos, const Vec2& ballStartingVel);
 private:
 	static constexpr float radius = 7.0f;
 	bool bottomCollision = false;

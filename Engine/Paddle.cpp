@@ -79,3 +79,8 @@ void Paddle::ResetCooldown()
 {
 	isCooldown = false;
 }
+
+void Paddle::ResetPaddlePos(const Vec2& paddleStartingPos)
+{
+	pos = paddleStartingPos;
+}

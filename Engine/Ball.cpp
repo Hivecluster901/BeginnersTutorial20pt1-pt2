@@ -79,3 +79,10 @@ Vec2 Ball::GetPosition() const
 {
 	return pos;
 }
+
+void Ball::ResetBall(const Vec2& ballStartingPos, const Vec2& ballStartingVel)
+{
+	bottomCollision = false;
+	pos = ballStartingPos;
+	vel = ballStartingVel;
+}

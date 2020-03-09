@@ -3,15 +3,20 @@
 #include "SpriteCodex.h"
 #include "Vec2.h"
 #include "Ball.h"
+#include "Keyboard.h"
 
 class LifeCounter {
 
 public:
-	void Dead(const Ball& ball);
-	void Draw(Graphics& gfx) const; 
+	bool Dead(const Ball& ball);
+	bool IsGameOver();
+	void ResetRoundOverConditon(const Keyboard& kbd);
+	void Draw(Graphics& gfx) const;
 private:
 	static constexpr int maxLives = 5;
 	int currentLives = maxLives;
-	float gapbtwpoos = 20.0f;
-	bool isRoundOver;
+	float gapbtwpoos = 40.0f;
+	bool isRoundOver = true;
+	bool isDeadAlreadyEvaluated = false;
+	bool isGameOver = false;
 };

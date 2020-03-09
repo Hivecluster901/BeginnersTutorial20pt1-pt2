@@ -28,6 +28,8 @@
 #include "Sound.h"
 #include "Brick.h"
 #include "Paddle.h"
+#include "LifeCounter.h"
+#include "SpriteCodex.h"
 
 class Game
 {
@@ -53,11 +55,16 @@ private:
 	static constexpr int nBricksDown = 4;
 	static constexpr int nBricks = nBricksAcross * nBricksDown;
 	FrameTimer ft;
+	LifeCounter lifeCounter;
+	Vec2 ballStartingPos = Vec2(324.0f, 300.0f);
+	Vec2 ballStartingVel = Vec2(300.0f, 300.0f);
+	Vec2 paddleStartingPos = Vec2(400.0f, 500.0f);
 	Ball ball;
 	Brick bricks[nBricks];
 	Paddle pad;
 	RectF walls;
 	Sound soundPad;
 	Sound soundBrick;
+	Sound soundFart;
 	/********************************/
 };
