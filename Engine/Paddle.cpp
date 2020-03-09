@@ -1,4 +1,5 @@
 #include "Paddle.h"
+#include <cmath>
 
 Paddle::Paddle( const Vec2 & pos_in,float halfWidth_in,float halfHeight_in )
 	:
