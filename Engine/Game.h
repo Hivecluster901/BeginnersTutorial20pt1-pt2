@@ -43,6 +43,7 @@ private:
 	void UpdateModel( float dt );
 	/********************************/
 	/*  User Functions              */
+	void DrawBorder(Graphics& gfx) const;
 	/********************************/
 private:
 	MainWindow& wnd;
@@ -51,14 +52,18 @@ private:
 	/*  User Variables              */
 	static constexpr float brickWidth = 40.0f;
 	static constexpr float brickHeight = 24.0f;
-	static constexpr int nBricksAcross = 18;
+	static constexpr int nBricksAcross = 12;
 	static constexpr int nBricksDown = 4;
 	static constexpr int nBricks = nBricksAcross * nBricksDown;
+	static constexpr float borderWidth = 10.0f;
+	static constexpr float padding = 1.0f;
 	FrameTimer ft;
 	LifeCounter lifeCounter;
 	Vec2 ballStartingPos = Vec2(324.0f, 300.0f);
 	Vec2 ballStartingVel = Vec2(300.0f, 300.0f);
 	Vec2 paddleStartingPos = Vec2(400.0f, 500.0f);
+	Vec2 bricksCenter = Vec2(400.0f, 150.0f);
+	const Vec2 topLeft = bricksCenter - Vec2(nBricksAcross / 2.0f * brickWidth, nBricksDown / 2.0f * brickHeight);
 	Ball ball;
 	Brick bricks[nBricks];
 	Paddle pad;

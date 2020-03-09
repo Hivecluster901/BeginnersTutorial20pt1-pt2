@@ -26,15 +26,13 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd ),
 	ball( ballStartingPos,ballStartingVel ),
-	walls( 0.0f,float( gfx.ScreenWidth ),0.0f,float( gfx.ScreenHeight ) ),
+	walls( topLeft - Vec2(0.0f, topLeft.y - borderWidth - padding), Vec2(topLeft.x + brickWidth * nBricksAcross,(float)gfx.ScreenHeight - borderWidth - padding) ),
 	soundPad( L"Sounds\\arkpad.wav" ),
 	soundBrick( L"Sounds\\arkbrick.wav" ),
 	soundFart(L"Sounds\\fart.wav"),
 	pad(paddleStartingPos,50.0f,15.0f )
 {
 	const Color colors[4] = { Colors::Red,Colors::Green,Colors::Blue,Colors::Cyan };
-
-	const Vec2 topLeft( 40.0f,40.0f );
 
 	int i = 0;
 	for( int y = 0; y < nBricksDown; y++ )
@@ -131,6 +129,16 @@ void Game::UpdateModel( float dt )
 	}
 }
 
+void Game::DrawBorder(Graphics& gfx) const
+{
+	const RectF border = walls.GetExpanded(padding + borderWidth);
+	const Color c = Colors::Blue;
+	gfx.DrawRect(border.left, border.top, border.right, border.top + borderWidth,c);
+	gfx.DrawRect(border.left, border.top + borderWidth, border.left + borderWidth, border.bottom, c);
+	gfx.DrawRect(border.left + borderWidth, border.bottom - borderWidth, border.right, border.bottom, c);
+	gfx.DrawRect(border.right - borderWidth, border.top + borderWidth, border.right, border.bottom - borderWidth, c);
+}
+
 void Game::ComposeFrame()
 {
 	for (const Brick& b : bricks)
@@ -138,20 +146,19 @@ void Game::ComposeFrame()
 		b.Draw(gfx);
 	}
 	lifeCounter.Draw(gfx);
-	if (!lifeCounter.IsGameOver())
-	{
-		if (lifeCounter.Dead(ball))
-		{
-			SpriteCodex::DrawReady(Vec2(400.0f, 300.0f), gfx);
-		}
-		else
-		{
-			ball.Draw(gfx);
-			pad.Draw(gfx);
-		}
-	}
-	else
+	DrawBorder(gfx);
+	if (lifeCounter.IsGameOver())
 	{
 		SpriteCodex::DrawGameOver(Vec2(400.0f, 300.0f), gfx);
 	}
+	else if (lifeCounter.Dead(ball))
+	{
+		SpriteCodex::DrawReady(Vec2(400.0f, 300.0f), gfx);
+	}
+	else
+	{
+		ball.Draw(gfx);
+		pad.Draw(gfx);
+	}
+	
 }

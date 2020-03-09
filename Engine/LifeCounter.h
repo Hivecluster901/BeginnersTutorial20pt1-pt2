@@ -13,7 +13,7 @@ public:
 	void ResetRoundOverConditon(const Keyboard& kbd);
 	void Draw(Graphics& gfx) const;
 private:
-	static constexpr int maxLives = 5;
+	static constexpr int maxLives = 3;
 	int currentLives = maxLives;
 	float gapbtwpoos = 40.0f;
 	bool isRoundOver = true;

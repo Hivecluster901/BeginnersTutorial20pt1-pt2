@@ -31,7 +31,7 @@ void LifeCounter::ResetRoundOverConditon(const Keyboard& kbd)
 
 void LifeCounter::Draw(Graphics& gfx) const
 {
-	for (int i = 0; i < currentLives; i++)
+	for (int i = 0; i < currentLives - 1; i++)
 	{
 		SpriteCodex::DrawPoo(Vec2(25.0f + gapbtwpoos * i, 25.0f), gfx);
 	}
