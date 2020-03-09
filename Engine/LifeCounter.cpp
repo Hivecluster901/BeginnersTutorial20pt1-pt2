@@ -1,8 +1,12 @@
 #include "LifeCounter.h"
 
-void LifeCounter::Dead()
+void LifeCounter::Dead(const Ball& ball)
 {
-	currentLives--;
+	if (ball.BottomCollision())
+	{
+		currentLives--;
+		isRoundOver = true;
+	}
 }
 
 void LifeCounter::Draw(Graphics& gfx) const
