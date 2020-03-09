@@ -130,7 +130,6 @@ void Game::UpdateModel( float dt )
 				soundReady.Play(1.0f, 1.0f);
 				soundReadyAlreadyPlayed = true;
 			}
-			pad.ResetPaddlePos(paddleStartingPos);
 			ball.ResetBall(ballStartingPos, ballStartingVel);
 			lifeCounter.ResetRoundOverConditon(wnd.kbd);
 		}
