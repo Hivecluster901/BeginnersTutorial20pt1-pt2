@@ -57,6 +57,7 @@ private:
 	static constexpr int nBricks = nBricksAcross * nBricksDown;
 	static constexpr float borderWidth = 10.0f;
 	static constexpr float padding = 1.0f;
+	bool soundReadyAlreadyPlayed = false;
 	FrameTimer ft;
 	LifeCounter lifeCounter;
 	Vec2 ballStartingPos = Vec2(324.0f, 300.0f);
@@ -71,5 +72,6 @@ private:
 	Sound soundPad;
 	Sound soundBrick;
 	Sound soundFart;
+	Sound soundReady;
 	/********************************/
 };

@@ -30,6 +30,7 @@ Game::Game( MainWindow& wnd )
 	soundPad( L"Sounds\\arkpad.wav" ),
 	soundBrick( L"Sounds\\arkbrick.wav" ),
 	soundFart(L"Sounds\\fart.wav"),
+	soundReady(L"Sounds\\ready.wav"),
 	pad(paddleStartingPos,50.0f,15.0f )
 {
 	const Color colors[4] = { Colors::Red,Colors::Green,Colors::Blue,Colors::Cyan };
@@ -68,6 +69,8 @@ void Game::UpdateModel( float dt )
 	{
 		if (!lifeCounter.Dead(ball))
 		{
+			soundReady.StopAll();
+			soundReadyAlreadyPlayed = false;
 			pad.Update(wnd.kbd, dt);
 			pad.DoWallCollision(walls);
 
@@ -122,6 +125,11 @@ void Game::UpdateModel( float dt )
 		}
 		else
 		{
+			if (!soundReadyAlreadyPlayed)
+			{
+				soundReady.Play(1.0f, 1.0f);
+				soundReadyAlreadyPlayed = true;
+			}
 			pad.ResetPaddlePos(paddleStartingPos);
 			ball.ResetBall(ballStartingPos, ballStartingVel);
 			lifeCounter.ResetRoundOverConditon(wnd.kbd);
@@ -133,10 +141,10 @@ void Game::DrawBorder(Graphics& gfx) const
 {
 	const RectF border = walls.GetExpanded(padding + borderWidth);
 	const Color c = Colors::Blue;
-	gfx.DrawRect(border.left, border.top, border.right, border.top + borderWidth,c);
-	gfx.DrawRect(border.left, border.top + borderWidth, border.left + borderWidth, border.bottom, c);
-	gfx.DrawRect(border.left + borderWidth, border.bottom - borderWidth, border.right, border.bottom, c);
-	gfx.DrawRect(border.right - borderWidth, border.top + borderWidth, border.right, border.bottom - borderWidth, c);
+	gfx.DrawRect((int)border.left, (int)border.top, (int)border.right, (int)border.top + (int)borderWidth,c);
+	gfx.DrawRect((int)border.left, (int)border.top + (int)borderWidth, (int)border.left + (int)borderWidth, (int)border.bottom, c);
+	gfx.DrawRect((int)border.left + (int)borderWidth, (int)border.bottom - (int)borderWidth, (int)border.right, (int)border.bottom, c);
+	gfx.DrawRect((int)border.right - (int)borderWidth, (int)border.top + (int)borderWidth, (int)border.right, (int)border.bottom - (int)borderWidth, c);
 }
 
 void Game::ComposeFrame()
